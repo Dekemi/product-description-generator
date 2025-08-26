@@ -30,7 +30,7 @@ except (FileNotFoundError, KeyError):
 def load_models():
     text_generator = pipeline(
         "text-generation",
-        model="google/flan-t5-small",
+        model="distilgpt2",
         token=hf_token,
     )
     image_captioner = pipeline(
