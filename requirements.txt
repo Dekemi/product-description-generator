@@ -1,5 +1,5 @@
 streamlit
-transformers
+transformers==4.42.0
+torch==2.1.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
 Pillow
-torch==2.8.0+cu126
 requests
