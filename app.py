@@ -36,21 +36,26 @@ tokenizer, model, image_captioner = load_models()
 # --- AI Model Functions ---
 def get_text_response(prompt):
 # 1. Tokenize the input prompt
-    input_ids = tokenizer.encode(prompt, return_tensors="pt")
+input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
 # 2. Generate new tokens based on the input
-    output_ids = model.generate(
-        input_ids,
-        max_new_tokens=250,
-        do_sample=True,
-        temperature=0.7
-    )
+output_ids = model.generate(
+    input_ids,
+    max_new_tokens=250,
+    do_sample=True,
+    temperature=0.7
+)
 
 # 3. Decode the generated tokens
-    generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
-# 4. Remove the original prompt from the output
-    return generated_text[len(prompt):]
+# 4. A more robust way to remove the original prompt from the output
+if generated_text.startswith(prompt):
+    # Remove the prompt and any leading whitespace
+    return generated_text[len(prompt):].strip()
+else:
+    # Fallback if the generated text doesn't start with the prompt
+    return generated_text.strip()
 
 def get_image_caption(image):
     """Generates a caption for the uploaded image."""
