@@ -9,15 +9,11 @@ Original file is located at
 
 # app.py
 
-# app.py
-
 import streamlit as st
 from PIL import Image
 import os
-import torch # Add this line
-from transformers import pipeline # Your existing line
-
-# --- Your existing code follows...
+import torch
+from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM # Add the new imports
 
 # --- Configuration ---
 try:
@@ -28,25 +24,37 @@ except (FileNotFoundError, KeyError):
 # --- Load Models ---
 @st.cache_resource
 def load_models():
-    text_generator = pipeline(
-        "text-generation",
-        model="distilgpt2",
-        token=hf_token,
-    )
-    image_captioner = pipeline(
-        "image-to-text",
-        model="microsoft/git-base",
-        token=hf_token,
-    )
-    return text_generator, image_captioner
+    # Text Generation Model (the part you fixed)
+    tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
+    model = AutoModelForCausalLM.from_pretrained("distilgpt2")
 
-text_generator, image_captioner = load_models()
+    # Image Captioning Model
+    image_captioner = pipeline(
+        "image-to-text",
+        model="microsoft/git-base",
+    )
+    return tokenizer, model, image_captioner
+
+tokenizer, model, image_captioner = load_models()
 
 # --- AI Model Functions ---
 def get_text_response(prompt):
-    # Pass the prompt and generation parameters to the pipeline
-    response = text_generator(prompt, max_length=500, do_sample=True, temperature=0.7)
-    return response[0]["generated_text"]
+    # 1. Tokenize the input prompt
+    input_ids = tokenizer.encode(prompt, return_tensors="pt")
+
+    # 2. Generate new tokens based on the input
+    output_ids = model.generate(
+        input_ids,
+        max_new_tokens=250,
+        do_sample=True,
+        temperature=0.7
+    )
+
+    # 3. Decode the generated tokens
+    generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+
+    # 4. Remove the original prompt from the output
+    return generated_text[len(prompt):]
 
 def get_image_caption(image):
     """Generates a caption for the uploaded image."""
