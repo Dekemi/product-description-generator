@@ -29,9 +29,9 @@ def load_models():
     model = AutoModelForCausalLM.from_pretrained("distilgpt2")
 
 # Image Captioning Model
-    image_captioner = pipeline("image-to-text", model="microsoft/git-base",)
+        image_captioner = pipeline("image-to-text", model="microsoft/git-base",)
         return tokenizer, model, image_captioner
-        tokenizer, model, image_captioner = load_models()
+    tokenizer, model, image_captioner = load_models()
 
 # --- AI Model Functions ---
 def get_text_response(prompt):
