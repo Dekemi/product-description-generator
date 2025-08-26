@@ -52,10 +52,10 @@ generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 # 4. A more robust way to remove the original prompt from the output
 if generated_text.startswith(prompt):
 # Remove the prompt and any leading whitespace
-        return generated_text[len(prompt):].strip()
+    return generated_text[len(prompt):].strip()
 else:
     # Fallback if the generated text doesn't start with the prompt
-        return generated_text.strip()
+    return generated_text.strip()
 
 def get_image_caption(image):
     """Generates a caption for the uploaded image."""
