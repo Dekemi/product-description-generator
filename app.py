@@ -30,8 +30,8 @@ def load_models():
 
 # Image Captioning Model
 image_captioner = pipeline("image-to-text", model="microsoft/git-base",)
-return tokenizer, model, image_captioner
-tokenizer, model, image_captioner = load_models()
+    return tokenizer, model, image_captioner
+    tokenizer, model, image_captioner = load_models()
 
 # --- AI Model Functions ---
 def get_text_response(prompt):
