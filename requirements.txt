@@ -2,3 +2,4 @@ streamlit
 transformers
 Pillow
 torch==2.8.0+cu126
+requests
