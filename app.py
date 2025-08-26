@@ -28,7 +28,7 @@ def load_models():
     tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
     model = AutoModelForCausalLM.from_pretrained("distilgpt2")
 
-    # Image Captioning Model
+# Image Captioning Model
     image_captioner = pipeline(
         "image-to-text",
         model="microsoft/git-base",
@@ -39,10 +39,10 @@ tokenizer, model, image_captioner = load_models()
 
 # --- AI Model Functions ---
 def get_text_response(prompt):
-    # 1. Tokenize the input prompt
+# 1. Tokenize the input prompt
     input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
-    # 2. Generate new tokens based on the input
+# 2. Generate new tokens based on the input
     output_ids = model.generate(
         input_ids,
         max_new_tokens=250,
@@ -50,10 +50,10 @@ def get_text_response(prompt):
         temperature=0.7
     )
 
-    # 3. Decode the generated tokens
+# 3. Decode the generated tokens
     generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
-    # 4. Remove the original prompt from the output
+# 4. Remove the original prompt from the output
     return generated_text[len(prompt):]
 
 def get_image_caption(image):
