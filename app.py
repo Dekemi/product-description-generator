@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/12GX5oGcANM9BOHzl35R0m22zoeIcP1t7
 """
 
-!pip install streamlit transformers torch accelerate Pillow
-
 # app.py
 
 import streamlit as st
