@@ -50,8 +50,8 @@ output_ids = model.generate(
 generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
 # 4. A more robust way to remove the original prompt from the output
-    if generated_text.startswith(prompt):
-        return generated_text[len(prompt):].strip()
+if generated_text.startswith(prompt):
+    return generated_text[len(prompt):].strip()
     else:
         return generated_text.strip()
 
