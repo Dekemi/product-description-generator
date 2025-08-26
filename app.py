@@ -24,7 +24,7 @@ except (FileNotFoundError, KeyError):
 # --- Load Models ---
 @st.cache_resource
 def load_models():
-    # Text Generation Model (the part you fixed)
+# Text Generation Model (the part you fixed)
     tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
     model = AutoModelForCausalLM.from_pretrained("distilgpt2")
 
