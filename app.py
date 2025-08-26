@@ -37,17 +37,17 @@ genai.configure(api_key=api_key)
 
 def get_gemini_response_with_image(prompt, image):
     """
-    Generates a response from the Gemini 2.0 Flash Live model using both text and an image.
+    Generates a response from the Gemini 1.5 Pro model using both text and an image.
     """
-    model = genai.GenerativeModel('gemini-2.0-flash-live-001')
+    model = genai.GenerativeModel('gemini-1.5-pro')
     response = model.generate_content([prompt, image])
     return response.text
 
 def get_gemini_response_text_only(prompt):
     """
-    Generates a response from the Gemini 2.0 Flash Live model using only text.
+    Generates a response from the Gemini 1.5 Pro model using only text.
     """
-    model = genai.GenerativeModel('gemini-2.0-flash-live-001')
+    model = genai.GenerativeModel('gemini-1.5-pro')
     response = model.generate_content(prompt)
     return response.text
 
