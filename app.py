@@ -44,7 +44,8 @@ text_generator, image_captioner = load_models()
 
 # --- AI Model Functions ---
 def get_text_response(prompt):
-    response = text_generator(prompt, max_new_tokens=250, do_sample=True, temperature=0.7)
+    # Pass the prompt and generation parameters to the pipeline
+    response = text_generator(prompt, max_length=500, do_sample=True, temperature=0.7)
     return response[0]["generated_text"]
 
 def get_image_caption(image):
@@ -138,3 +139,7 @@ if st.button("🚀 Generate Description", use_container_width=True, type="primar
 
             except Exception as e:
                 st.error(f"An error occurred: {e}")
+
+if st.sidebar.button("Clear Cache & Rerun"):
+    st.cache_resource.clear()
+    st.experimental_rerun()
