@@ -9,10 +9,16 @@ Original file is located at
 
 # app.py
 
+# app.py
+
 import streamlit as st
-from transformers import pipeline
+import google.generativeai as genai
 from PIL import Image
 import os
+import torch # Add this line
+from transformers import pipeline # Your existing line
+
+# --- Your existing code follows...
 
 # --- Configuration ---
 try:
