@@ -142,4 +142,4 @@ if st.button("🚀 Generate Description", use_container_width=True, type="primar
 
 if st.sidebar.button("Clear Cache & Rerun"):
     st.cache_resource.clear()
-    st.experimental_rerun()
+    st.rerun()
