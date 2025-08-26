@@ -36,7 +36,7 @@ tokenizer, model, image_captioner = load_models()
 # --- AI Model Functions ---
 def get_text_response(prompt):
 # 1. Tokenize the input prompt
-input_ids = tokenizer.encode(prompt, return_tensors="pt")
+ input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
 # 2. Generate new tokens based on the input
 output_ids = model.generate(
